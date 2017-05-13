@@ -35,11 +35,11 @@ router.get('/', auth.optional, function(req, res, next) {
   var offset = 0;
 
   if(typeof req.query.limit !== 'undefined'){
-    limit = req.query.limit;
+    limit = parseInt(req.query.limit, 10);
   }
 
   if(typeof req.query.offset !== 'undefined'){
-    offset = req.query.offset;
+    offset = parseInt(req.query.offset, 10);
   }
 
   if( typeof req.query.tag !== 'undefined' ){
@@ -128,7 +128,7 @@ router.post('/', auth.required, function(req, res, next){
         if (!user) { return res.sendStatus(401); }
 
         var article = new Article(req.body.article);
-        
+
         article.author = user;
 
         return article.save().then(function(){
