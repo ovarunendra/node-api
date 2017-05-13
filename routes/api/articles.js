@@ -92,11 +92,11 @@ router.get('/feed', auth.required, function(req, res, next) {
   var offset = 0;
 
   if(typeof req.query.limit !== 'undefined'){
-    limit = req.query.limit;
+    limit = parseInt(req.query.limit, 10);
   }
 
   if(typeof req.query.offset !== 'undefined'){
-    offset = req.query.offset;
+    offset = parseInt(req.query.offset, 10);
   }
 
   User.findById(req.payload.id).then(function(user){
